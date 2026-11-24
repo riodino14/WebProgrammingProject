@@ -1,0 +1,17 @@
+{
+  "name": "holiday-long-weekend-planner",
+  "version": "1.0.0",
+  "description": "Holiday & Long-Weekend Planner - find the best breaks, then plan the trip. Web Programming 2026 assignment.",
+  "type": "module",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "author": "Riodino Raihan (50261893)",
+  "license": "MIT"
+}

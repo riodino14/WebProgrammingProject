@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Holiday & Long-Weekend Planner</title>
+  <meta name="description" content="Find the best breaks for any country and year, then plan the trip: budget, currency, weather and calendar export.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <script src="js/theme-init.js"></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar on-photo">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/" aria-label="Holiday and Long-Weekend Planner, home">
+        <!-- Logo: a map pin with a plane taking off, over waves of sea and sunset.
+             The pin follows the text colour (white on the photo, dark on the light bar). -->
+        <svg class="brand-logo" viewBox="5 4 118 118" aria-hidden="true">
+          <path fill="currentColor" fill-rule="evenodd" d="M35.5 108 13 69.9A43 43 0 1 1 72.9 84.4ZM78 48.7a28 28 0 1 0-56 0 28 28 0 1 0 56 0Z"/>
+          <path d="M27 67C33 65 38 62 43 58M31 72C36 70 41 67 45 63" fill="none" stroke="#3fd0d0" stroke-width="2.6" stroke-linecap="round"/>
+          <path fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" transform="translate(55 49) rotate(-35) scale(.6)" d="M26 0C26-2 22-3.2 17-3.2H6L-5-22h-5.5l6 18.8H-15l-5.5-7.8h-4L-22-2.5-23 0l1 2.5-2.5 8.5h4L-15 3.2h10.5L-10.5 22H-5L6 3.2h11C22 3.2 26 2 26 0Z"/>
+          <path fill="#0a6f80" d="M28 111C44 106 54 92 64 83 72 76 79 74 86 75 77 79 70 87 62 96 53 106 42 111 28 111Z"/>
+          <path fill="#ff9a26" d="M33 111C50 105 59 94 69 86 80 77 93 74 103 77 108 79 111 82 114 87 104 82 95 83 86 88 72 95 58 108 33 111Z"/>
+          <path fill="#22bcc4" d="M22 104C34 115 49 115 63 108 79 100 95 86 112 92 101 83 89 84 78 90 62 98 46 110 22 104Z"/>
+          <path fill="#0a6f80" d="M29 112C44 122 66 123 81 112 89 106 97 97 104 93 94 97 86 103 77 108 62 115 45 116 29 112Z"/>
+        </svg>
+        <span>Holiday <em>&amp;</em> Long-Weekend Planner</span>
+      </a>
+      <nav id="siteNav" class="nav" aria-label="Sections">
+        <a href="#find">Find</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#plan">Plan</a>
+        <a href="#explore">Explore</a>
+        <a href="#plans" class="nav-cta">My plans</a>
+      </nav>
+      <button id="themeToggle" class="icon-btn" type="button" aria-label="Switch between light and dark mode" title="Light / dark mode">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor"/></svg>
+      </button>
+      <!-- small screens: the section links move into a drop-down menu -->
+      <button id="menuToggle" class="icon-btn menu-btn" type="button" aria-label="Menu" aria-controls="siteNav" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path class="i-open" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" fill="currentColor"/>
+          <path class="i-close" d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="heroHeading">
+    <img class="hero-bg" src="img/hero-beach.jpg" alt="" fetchpriority="high">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <h1 id="heroHeading">Find the best breaks, <br>then plan the trip.</h1>
+        <p class="lead">Pick a country, a year and how many leave days you can spend. The planner finds the breaks that give you the most days off for the least leave.</p>
+      </div>
+
+      <div class="picks-block">
+        <div class="picks-head">
+          <h2 class="picks-title"><span id="heroFlag" aria-hidden="true"></span> <span id="heroTitle">Loading…</span></h2>
+          <a class="picks-all" href="#find">All breaks &rarr;</a>
+        </div>
+        <p id="heroSub" class="picks-sub"></p>
+        <p id="yearNote" class="year-note" hidden></p>
+        <ol id="heroPicks" class="picks" aria-live="polite"></ol>
+      </div>
+
+      <div class="searchbar-wrap">
+        <form id="controls" class="searchbar" autocomplete="off">
+          <label class="sb-field sb-country">
+            <span>Country</span>
+            <select id="country" required><option>Loading…</option></select>
+          </label>
+          <label class="sb-field">
+            <span>Year</span>
+            <select id="year"></select>
+          </label>
+          <label class="sb-field">
+            <span>Leave days</span>
+            <input id="leave" type="number" min="0" max="15" step="1" value="2" inputmode="numeric">
+          </label>
+          <label class="sb-field">
+            <span>Weekend</span>
+            <select id="weekend">
+              <option value="auto">Default</option>
+              <option value="0,6">Sat + Sun</option>
+              <option value="5,6">Fri + Sat</option>
+              <option value="0">Sun only</option>
+              <option value="5">Fri only</option>
+            </select>
+          </label>
+          <button class="sb-submit" type="submit">Find breaks</button>
+        </form>
+        <div class="searchbar-meta">
+          <button id="locateBtn" class="sb-locate" type="button" title="Use my location to pick the country">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" fill="currentColor"/></svg>
+            Use my location
+          </button>
+          <a class="sb-link" href="#customDays">+ Company days / exams</a>
+          <p id="nextHoliday" class="next-holiday"></p>
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+    <p class="hero-credit">Photo: Klein Curaçao by Dronepicr, <a href="https://commons.wikimedia.org/wiki/File:Klein_Curacao_(213574409).jpeg" rel="noopener" target="_blank">CC BY 3.0</a></p>
+  </section>
+
+  <main id="main" class="wrap">
+    <!-- ============ FIND ============ -->
+    <section id="find" class="section" aria-labelledby="findTitle">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Step 1 &middot; Find</p>
+          <h2 id="findTitle">Best breaks</h2>
+        </div>
+        <div class="tools">
+          <label class="field field-inline">
+            <span>Sort</span>
+            <select id="sort">
+              <option value="value">Best value</option>
+              <option value="longest">Longest</option>
+              <option value="soonest">By date</option>
+            </select>
+          </label>
+          <label class="check"><input type="checkbox" id="includeFree"> Free long weekends</label>
+          <label class="check"><input type="checkbox" id="onlyUpcoming" checked> Only upcoming</label>
+        </div>
+      </div>
+
+      <ul class="legend" aria-label="Colour legend">
+        <li><i class="sw sw-weekend"></i>Weekend</li>
+        <li><i class="sw sw-holiday"></i>Public holiday</li>
+        <li><i class="sw sw-leave"></i>Leave day</li>
+        <li><i class="sw sw-custom"></i>Custom day off</li>
+        <li><i class="sw sw-busy"></i>Busy day</li>
+        <li><i class="sw sw-selected"></i>Selected break</li>
+      </ul>
+
+      <div class="grid-2 grid-find">
+        <div class="card">
+          <ol id="breaks" class="breaks" aria-live="polite"></ol>
+          <button id="moreBreaks" class="btn btn-ghost btn-block" type="button" hidden>Show more breaks</button>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Public holidays <span id="holCount" class="pill"></span></h3>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table" id="holidayTable">
+              <thead><tr><th scope="col">Date</th><th scope="col">Day</th><th scope="col">Holiday</th><th scope="col">Local name</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="muted small" id="longWeekendNote"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CALENDAR ============ -->
+    <section id="calendar" class="section band band-light" aria-labelledby="calTitle">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Your whole year</p>
+          <h2 id="calTitle">The whole year at a glance</h2>
+          <p class="muted">Click any day to select the best break around it.</p>
+        </div>
+        <div class="tools">
+          <label class="check"><input type="checkbox" id="showYearPlan"> Show my year plan</label>
+        </div>
+      </div>
+
+      <!-- A different question from "Best breaks": not one trip, but how to spend a whole year's leave.
+           Its result is drawn on the calendar below, so it lives in this section. -->
+      <div class="card year-plan">
+        <div class="year-plan-intro">
+          <h3>Plan my whole year</h3>
+          <p class="muted">Not one trip but the whole year: enter your yearly leave allowance and the optimizer spreads it over several breaks (4 days or more) to get the most days off in total. The chosen leave days are marked in the calendar below; click a break to plan it.</p>
+          <form id="yearPlanForm" class="inline-form">
+            <label class="field"><span>Annual leave days</span><input id="annualLeave" type="number" min="1" max="40" value="15" inputmode="numeric"></label>
+            <label class="field"><span>Max leave per break</span><input id="maxPerBreak" type="number" min="1" max="15" value="5" inputmode="numeric"></label>
+            <button class="btn btn-primary" type="submit">Optimize my year</button>
+          </form>
+        </div>
+        <div id="yearPlanResult" class="year-plan-result"></div>
+      </div>
+
+      <div id="yearCalendar" class="year-grid"></div>
+
+      <!-- heatmap at full width so every day is big enough to read and hover -->
+      <div class="card chart-wrap">
+        <div class="card-head"><h3>Year heatmap</h3><span class="muted small">Hover or click a day</span></div>
+        <canvas id="heatmap" class="chart" aria-label="Heatmap of every day of the year" role="img"></canvas>
+        <div id="heatTip" class="tooltip" hidden></div>
+        <ul class="legend legend-map">
+          <li><i class="sw sw-weekend"></i>Weekend</li>
+          <li><i class="sw sw-holiday"></i>Holiday</li>
+          <li><i class="sw sw-leave"></i>Selected leave</li>
+          <li><i class="sw" style="background:var(--leave-plan-bg)"></i>Year plan leave</li>
+        </ul>
+        <p id="heatNote" class="muted small"></p>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Holidays per month</h3><span class="muted small">Canvas</span></div>
+        <canvas id="monthChart" class="chart" aria-label="Bar chart of public holidays per month" role="img"></canvas>
+        <p id="monthChartNote" class="muted small"></p>
+      </div>
+    </section>
+
+    <!-- ============ PLAN ============ -->
+    <section id="plan" class="section" aria-labelledby="planTitle">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Step 2 &middot; Plan</p>
+          <h2 id="planTitle">Plan this break</h2>
+        </div>
+        <a id="backLink" class="back-link" href="#find" hidden>← Back</a>
+      </div>
+
+      <div id="planEmpty" class="card empty">
+        <p>Choose a break above (or click a day in the calendar) to start planning.</p>
+      </div>
+
+      <div id="planBody" hidden>
+        <!-- the season photo of the chosen break, as a wide banner (HD file) -->
+        <div class="card selected-break">
+          <img id="selectedPhoto" class="sel-photo" alt="" width="1600" height="1067">
+          <div id="selectedSummary"></div>
+          <div id="selectedRibbon" class="ribbon ribbon-lg"></div>
+          <div id="readOnlyNote" class="notice" hidden></div>
+        </div>
+
+        <div class="grid-2">
+          <form id="planForm" class="card form-grid" autocomplete="off">
+            <h3 class="span-2">Trip budget</h3>
+            <label class="field span-2"><span>Plan name</span><input id="planTitleInput" maxlength="80" placeholder="e.g. Spring trip to Japan"></label>
+            <label class="field"><span>Budget per day</span><input id="budget" type="number" min="0" step="any" value="100" inputmode="decimal"></label>
+            <label class="field"><span>Your currency</span><select id="currency"></select></label>
+            <label class="field"><span>Destination</span><select id="destination"></select></label>
+            <label class="field"><span>Show in</span><select id="displayCurrency"></select></label>
+            <label class="field"><span>City (for weather)</span><input id="city" maxlength="80" placeholder="e.g. Tokyo"></label>
+            <label class="field"><span>Travel style</span>
+              <select id="style">
+                <option value="60">Budget (60 USD/day in the US)</option>
+                <option value="120" selected>Mid-range (120 USD/day)</option>
+                <option value="220">Comfort (220 USD/day)</option>
+                <option value="custom">Custom…</option>
+              </select>
+            </label>
+            <label class="field span-2" id="baselineField" hidden><span>Baseline cost per day in the US (USD)</span><input id="baseline" type="number" min="1" step="any" value="120"></label>
+            <label class="field span-2"><span>Notes</span><textarea id="notes" rows="2" maxlength="1000" placeholder="Flights, hotel ideas, things to do…"></textarea></label>
+          </form>
+
+          <div class="card">
+            <h3>Budget check</h3>
+            <div id="budgetResult" class="budget-result"><p class="muted">Enter a budget to see the result.</p></div>
+            <h3 class="mt">Trip weather</h3>
+            <div id="weather" class="weather"><p class="muted">Enter a city to see the weather.</p></div>
+          </div>
+        </div>
+
+        <div class="card" id="expenseCard">
+          <div class="card-head">
+            <h3>Expense tracker</h3>
+            <span class="muted small" id="expenseHint">Expenses are saved with the plan on the server.</span>
+          </div>
+          <div class="grid-2 expense-grid">
+            <div>
+              <form id="expenseForm" class="expense-form no-print" autocomplete="off">
+                <label class="field"><span>Category</span>
+                  <select id="expCategory">
+                    <option>Lodging</option><option>Food</option><option>Transport</option>
+                    <option>Activities</option><option>Shopping</option><option>Other</option>
+                  </select>
+                </label>
+                <label class="field"><span>Amount (<b id="expCurrency">USD</b>)</span><input id="expAmount" type="number" min="0.01" step="any" required inputmode="decimal"></label>
+                <label class="field"><span>Date</span><input id="expDate" type="date"></label>
+                <label class="field"><span>Note</span><input id="expNote" maxlength="120" placeholder="e.g. Hotel deposit"></label>
+                <button class="btn btn-primary" type="submit">Add expense</button>
+              </form>
+              <ul id="expenseList" class="expense-list"></ul>
+            </div>
+            <div class="expense-chart">
+              <canvas id="expenseChart" class="chart" aria-label="Doughnut chart of expenses by category" role="img"></canvas>
+              <div id="expenseSummary"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- last step: everything above is filled in, now keep or export it (the PDF includes the expenses) -->
+        <div class="card actions no-print">
+          <div class="actions-head">
+            <p class="kicker">Step 3 &middot; Save</p>
+            <h3>Keep this plan</h3>
+          </div>
+          <div class="actions-buttons">
+            <button id="icsBtn" class="btn" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zm-2 8h14v10H5V10z" fill="currentColor"/></svg>
+              Add to calendar (.ics)</button>
+            <button id="pdfBtn" class="btn" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15H6V2zm8 1.5V8h4.5L14 3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16z" fill="currentColor"/></svg>
+              Save as PDF</button>
+            <button id="shareBtn" class="btn" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3-3a3 3 0 1 1 4.2 4.2l-1.5 1.5-1.4-1.4 1.5-1.5a1 1 0 1 0-1.4-1.4l-3 3a1 1 0 0 1-1.4 0zM13.4 10.6a1 1 0 0 1 0 1.4l-3 3a3 3 0 1 1-4.2-4.2l1.5-1.5 1.4 1.4-1.5 1.5a1 1 0 1 0 1.4 1.4l3-3a1 1 0 0 1 1.4 0z" fill="currentColor"/></svg>
+              Copy share link</button>
+            <button id="saveBtn" class="btn btn-primary" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h11l3 3v15H5V3zm2 2v4h8V5H7zm5 8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" fill="currentColor"/></svg>
+              Save plan</button>
+          </div>
+          <p id="saveState" class="muted small"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPLORE ============ -->
+    <section id="explore" class="section band band-dark" aria-labelledby="exploreTitle">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Explore</p>
+          <h2 id="exploreTitle">World holidays &amp; your own days</h2>
+          <p class="muted">Who is on holiday this week, and the days that only matter to you.</p>
+        </div>
+      </div>
+
+      <div class="card chart-wrap">
+        <div class="card-head">
+          <h3>World holiday map &middot; next 7 days</h3>
+          <span class="muted small">Click a dot to switch country</span>
+        </div>
+        <canvas id="worldMap" class="chart map" aria-label="World map of countries with a public holiday in the next 7 days" role="img"></canvas>
+        <div id="mapTip" class="tooltip" hidden></div>
+        <ul class="legend legend-map">
+          <li><i class="dot dot-today"></i>Holiday today</li>
+          <li><i class="dot dot-week"></i>Holiday this week</li>
+          <li><i class="dot dot-none"></i>No holiday</li>
+          <li><i class="dot dot-you"></i>You</li>
+        </ul>
+        <div id="worldList" class="world-list"></div>
+      </div>
+
+      <div class="card" id="customDays">
+        <div class="card-head">
+          <h3>Custom days</h3>
+          <span class="muted small">Saved in this browser (Web Storage)</span>
+        </div>
+        <p class="muted">Add company days off (they count as free days) or busy days such as exams (the planner never uses them as leave).</p>
+        <form id="customForm" class="inline-form" autocomplete="off">
+          <label class="field"><span>Date</span><input id="customDate" type="date" required></label>
+          <label class="field"><span>Type</span>
+            <select id="customType">
+              <option value="off">Day off (company / school)</option>
+              <option value="busy">Busy day (exam, deadline)</option>
+            </select>
+          </label>
+          <label class="field grow"><span>Label</span><input id="customLabel" maxlength="40" placeholder="e.g. Company foundation day"></label>
+          <button class="btn btn-primary" type="submit">Add day</button>
+        </form>
+        <ul id="customList" class="custom-list"></ul>
+      </div>
+    </section>
+
+    <!-- ============ MY PLANS ============ -->
+    <section id="plans" class="section" aria-labelledby="plansTitle">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Saved</p>
+          <h2 id="plansTitle">My saved plans</h2>
+          <p class="muted">Stored on the server in an SQLite database and linked to this browser.</p>
+        </div>
+      </div>
+      <div id="plansList" class="plan-cards"></div>
+    </section>
+  </main>
+
+  <!-- closing photo band: the page ends on a photo, the way it starts -->
+  <section class="closing" aria-labelledby="closingTitle">
+    <img class="closing-bg" src="img/season-summer-1-hd.jpg" alt="" loading="lazy">
+    <div class="wrap closing-inner">
+      <h2 id="closingTitle">Your next long weekend is closer than you think.</h2>
+      <a class="btn btn-primary" href="#find">Find another break</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p><b>Holiday &amp; Long-Weekend Planner</b> &middot; Web Programming 2026 &middot; Riodino Raihan</p>
+        <p class="muted small">Data: holidays from <a href="https://date.nager.at" rel="noopener" target="_blank">Nager.Date</a>,
+          currency from <a href="https://frankfurter.dev" rel="noopener" target="_blank">Frankfurter</a>,
+          price level from the <a href="https://data.worldbank.org" rel="noopener" target="_blank">World Bank</a>,
+          weather from <a href="https://open-meteo.com" rel="noopener" target="_blank">Open-Meteo</a>,
+          location from <a href="https://www.bigdatacloud.com" rel="noopener" target="_blank">BigDataCloud</a>,
+          map from <a href="https://www.naturalearthdata.com" rel="noopener" target="_blank">Natural Earth</a>.
+          Holiday lists can differ by region; check official sources before booking travel. Budget check is a rough estimate, not financial advice.</p>
+        <p class="muted small credits">Photos from <a href="https://commons.wikimedia.org" rel="noopener" target="_blank">Wikimedia Commons</a>:
+          Klein Curaçao by Dronepicr (CC BY 3.0);
+          spring: Takechiyo-dori by Kiyok, Akizuki by STA3816, Musashino by Douglas P. Perkins (CC BY-SA 3.0);
+          summer: Malapascua and Koh Mak by Vyacheslav Argenberg (CC BY 4.0);
+          autumn: Hogback Mountain by chensiyuan (CC BY-SA 4.0), Talcott Mountain by Ragesoss (CC BY-SA 3.0), Lovozero by Artem Abdukakharov (CC BY 4.0);
+          winter: St-Martin-de-Belleville and Les Avanchers by Florian Pépellin (CC BY-SA 4.0), Snow Road by Hemmo Vattulainen (CC BY 3.0).</p>
+      </div>
+      <p id="serverStats" class="server-stats muted small"></p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- One-page trip sheet for "Save as PDF" / Ctrl+P. Filled by renderPrintSheet() in main.js
+       right before printing; only this element is printed (see css/print.css). -->
+  <article id="printSheet" class="print-only print-sheet" aria-hidden="true"></article>
+</body>
+</html>

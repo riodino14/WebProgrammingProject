@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" color="#fff">
+  <!-- the header logo on a dark tile, so it shows on any browser tab -->
+  <rect width="128" height="128" rx="26" fill="#10282d"/>
+  <g transform="translate(6 4) scale(.9)">
+    <path fill="currentColor" fill-rule="evenodd" d="M35.5 108 13 69.9A43 43 0 1 1 72.9 84.4ZM78 48.7a28 28 0 1 0-56 0 28 28 0 1 0 56 0Z"/>
+    <path fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" transform="translate(55 49) rotate(-35) scale(.6)" d="M26 0C26-2 22-3.2 17-3.2H6L-5-22h-5.5l6 18.8H-15l-5.5-7.8h-4L-22-2.5-23 0l1 2.5-2.5 8.5h4L-15 3.2h10.5L-10.5 22H-5L6 3.2h11C22 3.2 26 2 26 0Z"/>
+    <path fill="#ff9a26" d="M33 111C50 105 59 94 69 86 80 77 93 74 103 77 108 79 111 82 114 87 104 82 95 83 86 88 72 95 58 108 33 111Z"/>
+    <path fill="#22bcc4" d="M22 104C34 115 49 115 63 108 79 100 95 86 112 92 101 83 89 84 78 90 62 98 46 110 22 104Z"/>
+    <path fill="#0a6f80" d="M29 112C44 122 66 123 81 112 89 106 97 97 104 93 94 97 86 103 77 108 62 115 45 116 29 112Z"/>
+  </g>
+</svg>
