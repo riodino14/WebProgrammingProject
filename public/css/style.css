@@ -303,7 +303,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 body { overflow-x: clip; }
 /* full-width colour band: border-image paints past the content box without making the page wider */
 .band { position: relative; isolation: isolate; padding-bottom: 64px; margin-top: 56px;
-  border-image: conic-gradient(var(--band) 0 0) fill 0 / / 0 100vmax; }
+  border-image: conic-gradient(var(--band) 0 0) fill 0 / 0 / 0 100vmax; }
 .band + .section { margin-top: 0; }
 .band-light { --band: var(--band-light); }
 .band-dark { --band: var(--band-dark); color: #e8f1ef; }
